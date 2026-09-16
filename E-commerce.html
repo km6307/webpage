@@ -313,7 +313,7 @@
         const navbar = document.querySelector('.nav');
         const btn = document.querySelector('.submit-btn');
 
-       const getDetails = (event) => {
+      const getDetails = async (event) => {
             event.preventDefault();
 
             const values = {};
@@ -326,6 +326,36 @@
 
             console.log(values);
             document.getElementById('ListValue').textContent = Object.values(values);
+
+            const feedback = {
+                role: document.getElementById('role').value,
+                class: document.getElementById('class').value,
+                target: document.getElementById('target').value,
+                comment: document.getElementById('comments').value
+            };
+
+            console.log(feedback);
+
+            try {
+                const response = await fetch('http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=feedbackdata', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(feedback)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Request failed: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Success:', data);
+                alert('Feedback saved successfully');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Unable to save feedback');
+            }
         };
 
         btn.addEventListener('click', getDetails);
@@ -336,6 +366,7 @@
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 10);
         });
+
     </script>
 </body>
 </html>
