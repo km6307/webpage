@@ -280,6 +280,7 @@
                     <div class="field">
                         <label for="role">Role<span style="color:red;">*</span></label>
                         <select id="role">
+                            <option>Select</option>
                             <option>Student</option>
                             <option>Teacher</option>
                             <option>Parent</option>
@@ -287,12 +288,14 @@
                         </select>
                     </div>
 
-                     <div class="field">
-                        <label for="role">Teacher</label>
-                        <select id="role">
-                            <option>Rajeev Kumar Chaurasia</option>
+                     <div class="field" id="teacherField" style="display: none;">
+                        <label for="Teacher">Teacher</label>
+                        <select id="Teacher">
+                            <option>select</option>
+                            <option>Rajeev Kumar Chaurasia(HOD)</option>
                             <option>Shashwat Srivastava</option>
                             <option>Sakshi Yadav</option>
+                            <option>Anshu Singh</option>
                             <option>Vishal Singh Negi</option>
                         </select>
                     </div>
@@ -307,7 +310,7 @@
                         <input type="text" id="target" placeholder="Teacher / Student name" required>
                     </div>
                      <div class="field" style="grid-column: 1 / -1;">
-                        <label for="comments">Additional Comments<span style="color:red;">*</span></label>
+                        <label for="comments">Suggest your Obsevation<span style="color:red;">*</span></label>
                         <textarea id="comments" placeholder="Share your suggestions and observations..." minlength="20" maxlength="150" required></textarea>
                     </div>
                 </div>
@@ -317,61 +320,16 @@
         </div>
     </div>
 
-    <div id="ListValue"></div>
-
     <script>
-        const navbar = document.querySelector('.nav');
-        const btn = document.querySelector('.submit-btn');
+        const role = document.getElementById('role');
+        const teacherField = document.getElementById('teacherField');
 
-      const getDetails = async (event) => {
-            event.preventDefault();
-
-            const values = {};
-            document.querySelectorAll('input, select, textarea').forEach((field) => {
-               
-               if (field.id){
-                values[field.id] = field.value;
-                }
-            });
-
-            console.log(values);
-            document.getElementById('ListValue').textContent = Object.values(values);
-
-            const feedback = {
-                role: document.getElementById('role').value,
-                class: document.getElementById('class').value,
-                target: document.getElementById('target').value,
-                comment: document.getElementById('comments').value
-            };
-
-            console.log(feedback);
-
-            try {
-                const response = await fetch("http://127.0.0.1:5500/submit_feedback.js", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(feedback)
-                });
-                if (!response.ok) {
-                    throw new Error(`Request failed: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log('Success:', data);
-                alert('Feedback saved successfully');
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Unable to save feedback');
-            }
-        };
-
-        btn.addEventListener('click', getDetails);
-
-        
-        
+        role.addEventListener('change', () => {
+            teacherField.style.display = role.value === 'Student' ? '' : 'none';
+        });
 
         window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 10);
+            document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 10);
         });
 
     </script>
