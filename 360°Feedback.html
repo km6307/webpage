@@ -273,12 +273,12 @@
             <form>
                 <div class="form-grid">
                     <div class="field">
-                        <label for="Student id">student Id</label>
+                        <label for="Student id">student Id <span style="color:red;">*</span></label>
                         <input type="text" id="" placeholder="Enter your Id " required>
                     </div>
 
                     <div class="field">
-                        <label for="role">Role</label>
+                        <label for="role">Role<span style="color:red;">*</span></label>
                         <select id="role">
                             <option>Student</option>
                             <option>Teacher</option>
@@ -287,18 +287,28 @@
                         </select>
                     </div>
 
-                    <div class="field">
-                        <label for="class">Department / Class</label>
-                        <input type="text" id="class" placeholder=" Diploma  Computer Science">
+                     <div class="field">
+                        <label for="role">Teacher</label>
+                        <select id="role">
+                            <option>Rajeev Kumar Chaurasia</option>
+                            <option>Shashwat Srivastava</option>
+                            <option>Sakshi Yadav</option>
+                            <option>Vishal Singh Negi</option>
+                        </select>
                     </div>
 
                     <div class="field">
-                        <label for="target">Feedback for</label>
-                        <input type="text" id="target" placeholder="Teacher / Student name">
+                        <label for="class">Department / Class <span style="color:red;">*</span></label>
+                        <input type="text" id="class" placeholder=" Diploma  Computer Science" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="target">Feedback for <span style="color:red;">*</span></label>
+                        <input type="text" id="target" placeholder="Teacher / Student name" required>
                     </div>
                      <div class="field" style="grid-column: 1 / -1;">
-                        <label for="comments">Additional Comments</label>
-                        <textarea id="comments" placeholder="Share your suggestions and observations..."></textarea>
+                        <label for="comments">Additional Comments<span style="color:red;">*</span></label>
+                        <textarea id="comments" placeholder="Share your suggestions and observations..." minlength="20" maxlength="150" required></textarea>
                     </div>
                 </div>
 
