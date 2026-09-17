@@ -337,14 +337,11 @@
             console.log(feedback);
 
             try {
-                const response = await fetch('http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=feedbackdata', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                const response = await fetch("http://127.0.0.1:5500/submit_feedback.js", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(feedback)
                 });
-
                 if (!response.ok) {
                     throw new Error(`Request failed: ${response.status}`);
                 }
