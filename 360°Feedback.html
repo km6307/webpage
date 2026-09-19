@@ -305,7 +305,7 @@
                         <input type="text" id="class" placeholder=" Diploma  Computer Science" required>
                     </div>
 
-                    <div class="field">
+                    <div class="field" id="feedbackForField">
                         <label for="target">Feedback for <span style="color:red;">*</span></label>
                         <input type="text" id="target" placeholder="Teacher / Student name" required>
                     </div>
@@ -323,9 +323,11 @@
     <script>
         const role = document.getElementById('role');
         const teacherField = document.getElementById('teacherField');
+        const feedbackForField = document.getElementById('feedbackForField');
 
         role.addEventListener('change', () => {
             teacherField.style.display = role.value === 'Student' ? '' : 'none';
+            feedbackForField.style.display = role.value === 'Student' ? 'none' : '';
         });
 
         window.addEventListener('scroll', () => {
