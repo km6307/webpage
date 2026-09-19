@@ -358,10 +358,14 @@
         const role = document.getElementById('role');
         const teacherField = document.getElementById('teacherField');
         const feedbackForField = document.getElementById('feedbackForField');
+        const subjectField = document.getElementById('subjectField');
+        const yearField = document.getElementById('YearField');
 
         role.addEventListener('change', () => {
             teacherField.style.display = role.value === 'Student' ? '' : 'none';
             feedbackForField.style.display = role.value === 'Student' ? 'none' : '';
+            subjectField.style.display = role.value === 'Teacher' ? 'none' : '';
+            yearField.style.display = role.value === 'Teacher' ? 'none' : '';
         });
 
         window.addEventListener('scroll', () => {
