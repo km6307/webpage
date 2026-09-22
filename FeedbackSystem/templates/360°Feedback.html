@@ -458,22 +458,22 @@
             </div>
             <div class="rating-heading">
                 <span>Evaluation Criteria</span>
-                <span>1 = Poor &nbsp;&nbsp; 5 = Excellent</span>
+                <span>1 = 20% &nbsp;&nbsp; 2 = 40% &nbsp;&nbsp; 3 = 60% &nbsp;&nbsp; 4 = 80% &nbsp;&nbsp; 5 = 100%</span>
             </div>
             <div class="rating-row">
                 <div class="rating-name">
                     Teaching Effectiveness
                 </div>
                 <div class="rating">
-                    <input type="radio" name="teaching" id="t1">
+                    <input type="radio" name="teaching" id="t1" value="1">
                     <label for="t1">1</label>
-                    <input type="radio" name="teaching" id="t2">
+                    <input type="radio" name="teaching" id="t2" value="2">
                     <label for="t2">2</label>
-                    <input type="radio" name="teaching" id="t3">
+                    <input type="radio" name="teaching" id="t3" value="3">
                     <label for="t3">3</label>
-                    <input type="radio" name="teaching" id="t4">
+                    <input type="radio" name="teaching" id="t4" value="4">
                     <label for="t4">4</label>
-                    <input type="radio" name="teaching" id="t5">
+                    <input type="radio" name="teaching" id="t5" value="5">
                     <label for="t5">5</label>
                 </div>
             </div>
@@ -482,15 +482,15 @@
                     Communication Skills
                 </div>
                 <div class="rating">
-                    <input type="radio" name="communication" id="c1">
+                    <input type="radio" name="communication" id="c1" value="1">
                     <label for="c1">1</label>
-                    <input type="radio" name="communication" id="c2">
+                    <input type="radio" name="communication" id="c2" value="2">
                     <label for="c2">2</label>
-                    <input type="radio" name="communication" id="c3">
+                    <input type="radio" name="communication" id="c3" value="3">
                     <label for="c3">3</label>
-                    <input type="radio" name="communication" id="c4">
+                    <input type="radio" name="communication" id="c4" value="4">
                     <label for="c4">4</label>
-                    <input type="radio" name="communication" id="c5">
+                    <input type="radio" name="communication" id="c5" value="5">
                     <label for="c5">5</label>
                 </div>
             </div>
@@ -499,15 +499,15 @@
                     Classroom Support
                 </div>
                 <div class="rating">
-                    <input type="radio" name="support" id="s1">
+                    <input type="radio" name="support" id="s1" value="1">
                     <label for="s1">1</label>
-                    <input type="radio" name="support" id="s2">
+                    <input type="radio" name="support" id="s2" value="2">
                     <label for="s2">2</label>
-                    <input type="radio" name="support" id="s3">
+                    <input type="radio" name="support" id="s3" value="3">
                     <label for="s3">3</label>
-                    <input type="radio" name="support" id="s4">
+                    <input type="radio" name="support" id="s4" value="4">
                     <label for="s4">4</label>
-                    <input type="radio" name="support" id="s5">
+                    <input type="radio" name="support" id="s5" value="5">
                     <label for="s5">5</label>
                 </div>
             </div>
@@ -516,15 +516,15 @@
                     Professional Growth
                 </div>
                 <div class="rating">
-                    <input type="radio" name="growth" id="g1">
+                    <input type="radio" name="growth" id="g1" value="1">
                     <label for="g1">1</label>
-                    <input type="radio" name="growth" id="g2">
+                    <input type="radio" name="growth" id="g2" value="2">
                     <label for="g2">2</label>
-                    <input type="radio" name="growth" id="g3">
+                    <input type="radio" name="growth" id="g3" value="3">
                     <label for="g3">3</label>
-                    <input type="radio" name="growth" id="g4">
+                    <input type="radio" name="growth" id="g4" value="4">
                     <label for="g4">4</label>
-                    <input type="radio" name="growth" id="g5">
+                    <input type="radio" name="growth" id="g5" value="5">
                     <label for="g5">5</label>
                 </div>
             </div>
@@ -568,8 +568,12 @@
           const year = document.getElementById('year').value;
           const className = document.getElementById('class').value;
           const comments = document.getElementById('comments').value;
+                    const ratings = Object.fromEntries(
+              [...document.querySelectorAll('.rating input:checked')]
+                                .map(input => [input.name, Number(input.value) * 20 + '%'])
+            );
 
-                console.log({ roleValue, teacher, subject, target, year, className, comments });
+                console.log({ roleValue, teacher, subject, target, year, className, comments, ratings });
         });
         
     </script>
