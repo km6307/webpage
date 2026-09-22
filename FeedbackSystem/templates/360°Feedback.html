@@ -379,7 +379,7 @@
                 <div class="form-grid">
                     <div class="field">
                         <label for="Student id"> Id <span style="color:red;">*</span></label>
-                        <input type="text" id="" placeholder="Enter your Id " required>
+                        <input type="text" id="" placeholder="Enter your Id ">
                     </div>
 
                     <div class="field">
@@ -407,12 +407,12 @@
 
                     <div class="field">
                         <label for="class">Department / Class <span style="color:red;">*</span></label>
-                        <input type="text" id="class" placeholder=" Diploma  Computer Science" required>
+                        <input type="text" id="class" placeholder=" Diploma  Computer Science">
                     </div>
 
                     <div class="field" id="feedbackForField">
                         <label for="target">Feedback for <span style="color:red;">*</span></label>
-                        <input type="text" id="target" placeholder="Teacher / Student name" required>
+                        <input type="text" id="target" placeholder="Teacher / Student name">
                     </div>
 
                      <div class="field" id="subjectField">
@@ -557,6 +557,21 @@
         window.addEventListener('scroll', () => {
             document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 10);
         });
+
+        document.querySelector('form').addEventListener('submit', (event) => {
+            event.preventDefault();
+
+          const roleValue = document.getElementById('role').value;
+          const teacher = document.getElementById('Teacher').value;
+          const subject = document.getElementById('subject').value;
+          const target = document.getElementById('target').value;
+          const year = document.getElementById('year').value;
+          const className = document.getElementById('class').value;
+          const comments = document.getElementById('comments').value;
+
+                console.log({ roleValue, teacher, subject, target, year, className, comments });
+        });
+        
     </script>
 </body>
 </html>
