@@ -97,8 +97,8 @@
     <form action="registration" method="post">
         {% csrf_token %}
 <div class="form-group">
-  <label for="first_name"> Name</label>
-   <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter Your Name" required>
+  <label for="Name"> Name</label>
+   <input type="text" class="form-control" name="Name" id="Name" placeholder="Enter Your Name" required>
 </div>
 
  <div class="form-group">
@@ -111,19 +111,19 @@
  <input type="email" class="form-control" name="email" id="email" placeholder="Enter email Name" required>
  </div>
 
-                    <div class="form-group">
-                    <label for="password"> Password </label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
-                    </div>
+   <div class="form-group">
+        <label for="password"> Password </label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+    </div>
 
-                     <div class="form-group">
-                    <label for="cpassword">CPassword </label>
-                        <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Enter password again" required>
-                    </div>
+    <div class="form-group">
+      <label for="cpassword">CPassword </label>
+       <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Enter password again" required>
+    </div>
 
-                    <div class="form-group">
-                        <input type="submit"  class="btn btn-success" value="Register">
-                    </div>
+    <div class="form-group">
+     <input type="submit"  class="btn btn-success" value="Register">
+    </div>
     </form>
   </div>
   <div class="card-footer"></div>
