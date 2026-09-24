@@ -24,7 +24,7 @@ def Registration(request):
                     user.save()
                     messages.info(request, "User Created Successfully")
                     # return redirect("/")  #for home page
-                    return render(request, 'registration.html')
+                    return render(request, 'login.html')
             else:
                 messages.info(request, "Password and Confirm Password Do not Match")
                 return render(request, 'registration.html')
