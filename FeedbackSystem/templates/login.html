@@ -52,6 +52,21 @@
         background: #fff;
         box-shadow: 0 0 0 4px rgba(25, 135, 84, .12);
       }
+      .password-wrapper { position: relative; }
+      .password-wrapper input { padding-right: 48px; }
+      .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 14px;
+        border: 0;
+        padding: 0;
+        color: #557261;
+        background: transparent;
+        font-size: 18px;
+        cursor: pointer;
+        transform: translateY(-50%);
+      }
+      .toggle-password:focus { outline: 2px solid #198754; outline-offset: 2px; }
       .btn {
         width: 100%;
         padding: 14px;
@@ -74,6 +89,11 @@
  <div class="container">
   <div class="row">
     <div class="col-md-12 mt-2">
+          {% for msg in messages %}
+       <div class="alert alert-danger" role="alert">
+                  {{ msg }}
+             </div>
+        {% endfor %}
  
       <div class="card">
   <div class="card-header">
@@ -81,7 +101,7 @@
     <p>Sign in to continue to the feedback system</p>
   </div>
   <div class="card-body">
-    <form action="home" method="post">
+    <form action="login" method="Post">
         {% csrf_token %}
 
 
@@ -91,7 +111,10 @@
         </div>
         <div class="form-group">
             <label for="password"> Password <span style="color:red">*</span> </label>
-            <input type="password" name="password" id="password" placeholder="Enter password" required>
+            <div class="password-wrapper">
+              <input type="password" name="password" id="password" placeholder="Enter password" required>
+              <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password" aria-pressed="false">&#128065;</button>
+            </div>
         </div>
         <div class="form-group">
             <input type="submit" class="btn" value="Login">
@@ -105,4 +128,14 @@
 </div>
 
  </body>
+ <script>
+   const password = document.getElementById('password');
+   const togglePassword = document.getElementById('togglePassword');
+   togglePassword.addEventListener('click', function () {
+     const isHidden = password.type === 'password';
+     password.type = isHidden ? 'text' : 'password';
+     this.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+     this.setAttribute('aria-pressed', isHidden);
+   });
+ </script>
 </html>
