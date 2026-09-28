@@ -11,7 +11,7 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
-            return redirect('360°Feedback.html')
+            return redirect('home')
 
         messages.info(request, 'Either Username or Password is Incorrect')
         return render(request, 'login.html')
