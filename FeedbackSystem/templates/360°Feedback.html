@@ -20,7 +20,7 @@
 
         .nav {
             width: 100%;
-            height: 76px;
+            height: 56px;
             background: rgba(15, 23, 42, 0.82);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
@@ -54,25 +54,13 @@
             width: 52px;
             height: 52px;
             border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.4);
+            border: 3px solid rgba(30, 32, 196, 0.4);
             background: rgba(255, 255, 255, 0.08);
             padding: 3px;
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
-            animation: logo-loading 2.9s linear infinite;
-            object-fit: cover;
         }
 
         #logo:hover {
             animation-duration: 0.8s;
-        }
-
-        @keyframes logo-loading {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
         }
 
         .navbar {
@@ -504,7 +492,7 @@
      {% load static %}
       <div class="nav">
         <div class="nav-inner">
-            <img id="logo" src="{% static 'logo.jpg' %}" alt="360° logo">
+            <img id="logo" src="{% static 'logo1.jpg' %}" alt="360° logo">
             <ul class="navbar">
                 <li id="home">home</li>
                 <li id="about">about</li>
@@ -530,11 +518,6 @@
         {% csrf_token %}
 
                 <div class="form-grid">
-                    <div class="field">
-                        <label for="Student id"> Id <span style="color:red;">*</span></label>
-                        <input type="text" id="" placeholder="Enter your Id ">
-                    </div>
-
                     <div class="field">
                         <label for="role">Role<span style="color:red;">*</span></label>
                         <select id="role">
@@ -590,7 +573,7 @@
                     </div>
 
                     <div class="field" id="YearField">
-                        <label for="year">Year & Semster</label>
+                        <label for="year">Year & Semster <span style="color:red;">*</span></label>
                         <select id="year">
                             <option>select</option>
                             <option>l year -l semester</option>
@@ -698,13 +681,11 @@
         const teacherField = document.getElementById('teacherField');
         const feedbackForField = document.getElementById('feedbackForField');
         const subjectField = document.getElementById('subjectField');
-        const yearField = document.getElementById('YearField');
-
+    
         role.addEventListener('change', () => {
             teacherField.style.display = role.value === 'Student' ? '' : 'none';
             feedbackForField.style.display = role.value === 'Student' ? 'none' : '';
             subjectField.style.display = role.value === 'Parent' ? 'none' : '';
-            yearField.style.display = role.value === 'Parent' ? 'none' : '';
         });
 
         window.addEventListener('scroll', () => {
