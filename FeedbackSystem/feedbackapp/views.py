@@ -19,4 +19,7 @@ def login(request):
 		
 def home(request):
     return render(request, '360°Feedback.html')
-	     
+
+def submit(request):
+    return render(request, 'login.html')
+	     	     
