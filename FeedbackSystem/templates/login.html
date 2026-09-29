@@ -80,21 +80,38 @@
         box-shadow: 0 5px 12px rgba(25, 135, 84, .18);
         transition: background .2s, transform .2s, box-shadow .2s;
       }
-      .btn:hover { background: #146c43; transform: translateY(-1px); box-shadow: 0 7px 16px rgba(25, 135, 84, .25); }
-      .card-footer { padding: 16px; color: #789083; background: #fafcfb; text-align: center; font-size: 12px; }
-      @media (max-width: 480px) { .card-header, .card-body { padding-left: 24px; padding-right: 24px; } }
+      .btn:hover {
+           background: #146c43; 
+           transform: translateY(-1px);
+            box-shadow: 0 7px 16px rgba(25, 135, 84, .25); 
+        }
+      .card-footer {
+         padding: 16px;
+        color: #789083;
+         background: #fafcfb; 
+         text-align: center;
+          font-size: 12px; 
+        }
+      .alert { 
+        color: #dc3545; 
+        transition: opacity .3s ease;
+        padding-buttom:10px;
+       }
+      .alert.alert-danger { 
+        color: #dc3545; 
+      }
+      .alert.hide { 
+        opacity: 0; 
+      }
+      @media (max-width: 480px) {
+         .card-header, .card-body { padding-left: 24px; padding-right: 24px; } }
     </style>
     </head>
  <body>
  <div class="container">
   <div class="row">
     <div class="col-md-12 mt-2">
-          {% for msg in messages %}
-       <div class="alert alert-danger" role="alert">
-                  {{ msg }}
-             </div>
-        {% endfor %}
- 
+         
       <div class="card">
   <div class="card-header">
     <h1>Login Page</h1>
@@ -116,6 +133,12 @@
               <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password" aria-pressed="false">&#128065;</button>
             </div>
         </div>
+         {% for msg in messages %}
+       <div class="alert alert-danger" role="alert">
+                  {{ msg }}
+             </div>
+        {% endfor %}
+ 
         <div class="form-group">
             <input type="submit" class="btn" value="Login">
         </div>
@@ -136,6 +159,13 @@
      password.type = isHidden ? 'text' : 'password';
      this.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
      this.setAttribute('aria-pressed', isHidden);
+   });
+
+   document.querySelectorAll('.alert').forEach(function (alert) {
+     setTimeout(function () {
+       alert.classList.add('hide');
+       setTimeout(function () { alert.remove(); }, 300);
+     }, 3000);
    });
  </script>
 </html>

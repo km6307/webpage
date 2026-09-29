@@ -335,8 +335,9 @@
     </style>
 </head>
 <body>
+     {% load static %}
     <div class="nav">
-        <img id="logo" style="border-radius:50%;margin-left:50px;padding:1px;" src="logo.jpg" alt="360°" width="60px" height="60px">
+        <img id="logo" style="border-radius:50%;margin-left:50px;padding:1px;" src="{% static 'logo.jpg' %}" alt="360°" width="60px" height="60px">
         <ul class="navbar">
             <li id="home">home</li>
             <li id="about">about</li>
@@ -377,11 +378,6 @@
             <h2>Submit Feedback</h2>
             <form>
                 <div class="form-grid">
-                    <div class="field">
-                        <label for="Student id"> Id <span style="color:red;">*</span></label>
-                        <input type="text" id="" placeholder="Enter your Id ">
-                    </div>
-
                     <div class="field">
                         <label for="role">Role<span style="color:red;">*</span></label>
                         <select id="role">
