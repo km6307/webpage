@@ -60,8 +60,8 @@ def submit(request):
         send_mail(
                 'Feedback Was Submitted',
                 feedback,
-                'from@example.com',
-                ['to@example.com'],
+                'mppolytechnic',
+                ['hod sir email','principle sir email'],
                 fail_silently=False,
             )
         messages.info(request,"mail send successfully")
