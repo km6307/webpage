@@ -21,5 +21,14 @@ def home(request):
     return render(request, '360°Feedback.html')
 
 def submit(request):
+    if request.method == 'POST':
+           roleValue= request.POST.get('', '')
+           teacher= request.POST.get('')
+           subject= request.POST.get('', '')
+           target= request.POST.get('')
+           className= request.POST.get('', '')
+           year= request.POST.get('')
+           ratings= request.POST.get('')
+           comment= request.POST.get('')
     return render(request, 'login.html')
-	     	     
+	     	    
