@@ -22,7 +22,6 @@ def home(request):
     return render(request, '360°Feedback.html')
 
 def logout(request):
-    auth_logout(request)
     return render(request, 'login.html')
 
 def submit(request):
