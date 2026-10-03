@@ -7,6 +7,69 @@
     <title>360° Feedback System</title>
     <link rel="icon" type="image/jpeg" href="{% static 'logo1.jpg' %}">
   <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 6%;
+            background: #13233b;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.2);
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+        .nav.scrolled {
+            background: #10243d;
+            box-shadow: 0 6px 22px rgba(15, 23, 42, 0.3);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            min-height: 54px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav #logo {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .navbar a {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 20px;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            background: #e67e22;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .navbar a:hover {
+            background: #cf6812;
+            transform: translateY(-2px);
+        }
+        .navbar a:focus-visible {
+            outline: 3px solid #ffd28f;
+            outline-offset: 3px;
+        }
+        @media (max-width: 480px) {
+            .nav { padding: 8px 5%; }
+            .nav #logo { width: 42px; height: 42px; }
+            .navbar a { padding: 9px 15px; }
+        }
+    </style>
 </head>
 <body>
     <div id="top">
@@ -24,8 +87,8 @@
         <div class="nav-inner">
             <img id="logo" src="{% static 'logo1.jpg' %}" alt="360° logo">
             <ul class="navbar">
-             <li><a href="{% url 'logout' %}" class="nav-link">
-                <i style="font-size:30px; margin-right: 50rem;"></i>Logout</a></li>
+             <li><a href="{% url 'logout' %}">
+                <i aria-hidden="true">↪</i>Logout</a></li>
             </ul>
         </div>
     </div> 
