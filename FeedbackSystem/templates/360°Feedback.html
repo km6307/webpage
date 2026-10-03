@@ -7,8 +7,6 @@
     <title>360° Feedback System</title>
     <link rel="icon" type="image/jpeg" href="{% static 'logo1.jpg' %}">
   <link rel="stylesheet" href="{% static 'style.css' %}">
-
-     
 </head>
 <body>
     <div id="top">
@@ -22,17 +20,15 @@
         </div>
     </div>
 
-     {% comment %} <div class="nav">
+     <div class="nav">
         <div class="nav-inner">
             <img id="logo" src="{% static 'logo1.jpg' %}" alt="360° logo">
             <ul class="navbar">
-                <li id="home">home</li>
-                <li id="about">about</li>
-                <li id="login">login</li>
-                <li id="contact">contact</li>
+             <li><a href="{% url 'logout' %}" class="nav-link">
+                <i style="font-size:30px; margin-right: 50rem;"></i>Logout</a></li>
             </ul>
         </div>
-    </div> {% endcomment %} 
+    </div> 
 
     <div class="container">
         <div class="header">
