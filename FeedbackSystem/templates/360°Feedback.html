@@ -7,89 +7,7 @@
     <title>360° Feedback System</title>
     <link rel="icon" type="image/jpeg" href="{% static 'logo1.jpg' %}">
   <link rel="stylesheet" href="{% static 'style.css' %}">
-    <style>
-        .nav{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            border-radius:20px;
-            padding: 0.75rem clamp(1rem, 4vw, 3rem);
-            background: linear-gradient(120deg, #123b70, #1769aa);
-            box-shadow: 0 4px 14px rgba(17, 42, 75, 0.2);
-        }
-        .nav > p {
-            margin: 0;
-            font-size: 1.15rem;
-            font-weight: 600;
-        }
-        .navbar {
-            display: flex;
-            align-items: center;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        .navbar a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            padding: 0.65rem 1.2rem;
-            color: #fff;
-            font-weight: 600;
-            text-decoration: none;
-            background: #e67e22;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            border-radius: 999px;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-        .navbar a:hover,
-        .navbar a:focus-visible {
-            background: #cf6813;
-            transform: translateY(-1px);
-        }
-        @media (max-width: 600px) {
-            .nav {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-        footer{
-            background-color: #123b70;
-            color: white;
-            padding: 10px;
-        }
-        footer p{
-            text-align: center;
-            padding: 20px;
-            font-size: 20px;
-        }
-        .design {
-            padding:20px 0px 40px 70px;
 
-            list-style: none;
-            color: white;
-        }
-        .design a {
-            color: #123b70;
-            text-decoration: none;
-            font-weight: 300;
-            color: white;
-            margin-top: 15px;
-        }
-        .design a:hover,
-        .design a:focus-visible {
-            color: #e67e22;
-            text-decoration: underline;
-        }
-        .footer-content {
-            display: flex;
-            text-justify: space-between;
-            flex-wrap: wrap;
-            gap:50px;
-        }
-       
-    </style>
 </head>
 <body>
     <div id="top">
@@ -365,8 +283,11 @@
             </ul>
         </div>
       </div>
-        <div>
-        <date>Created by: <span style="font-weight: bold; color:#e67e22;">A Diploma Student</span></date>
+        <div style="border:3px solid #ccc;">
+            <p>Created by: <span style="font-weight: bold; color:#e67e22;">A Diploma Student</span></p>
+            <p>Email: ............@gmail.com</p>
+            <p>Contact: +91-XXXXXXXXXX</p>
+           <p>Address: Maharana Pratap Polytechnic Gorakhpur, Uttar Pradesh, India</p>
         </div>
     </footer>
 </body>
