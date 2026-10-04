@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
+from django.http import request
 from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 
@@ -23,6 +24,7 @@ def home(request):
 
 def logout(request):
     return render(request, 'login.html')
+    messages.info(request,"feedback  send successfully.your are eligible for next feedback after 1 month.")
 
 def submit(request):
     if request.method != 'POST':
