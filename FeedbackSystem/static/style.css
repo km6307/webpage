@@ -20,10 +20,8 @@
             align-items: center;
             gap: 24px;
             color: #ffffff;
-            background: linear-gradient(135deg, #14532d, #16a34a 58%, #84cc16);
-            border: 1px solid rgba(255, 255, 255, 0.45);
+            border: 1px solid rgba(208, 180, 43, 0.45);
             border-radius: 22px;
-            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
             position: relative;
             overflow: hidden;
         }

@@ -8,6 +8,11 @@
     <link rel="icon" type="image/jpeg" href="{% static 'logo1.jpg' %}">
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <style>
+    #top {
+        background: linear-gradient(135deg, #f3f7ff, #eef4ff);
+        color: #170d0d;
+        box-shadow: none;
+      }
       .nav{
             display: flex;
             align-items: center;
@@ -15,8 +20,9 @@
             gap: 1rem;
             border-radius:20px;
             padding: 0.75rem clamp(1rem, 4vw, 3rem);
-            background: linear-gradient(120deg, #123b70, #1769aa);
-            box-shadow: 0 4px 14px rgba(17, 42, 75, 0.2);
+            background: linear-gradient(135deg, #f3f7ff, #eef4ff);
+            
+           
         }
         .nav > p {
             margin: 0;
@@ -103,13 +109,14 @@
         </div>
     </div>
     <div class="nav">
-        <p style="text-align:center; font-size:30px; color:white;">Welcome: 
+        <p style="text-align:center; font-size:30px; color:black;">Welcome: 
         <span style="font-weight: bold; color:#e67e22;">{{ user.username }}</span></p>
      <ul class="navbar">
              <li><a href="{% url 'logout' %}">
                 <i aria-hidden="true">↪</i>Logout</a></li>
             </ul>
     </div>
+    <hr>
 
     <div class="container">
         <div class="header">
