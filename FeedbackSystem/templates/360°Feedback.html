@@ -639,14 +639,14 @@
 
         <div class="feedback-box">
             <h2>Submit Feedback</h2>
-    <form action="submit" method="post">
+    <form action="{% url 'submit' %}" method="post">
         {% csrf_token %}
 
                 <div class="form-grid">
                     <div class="field">
                         <label for="role">Role<span style="color:red;">*</span></label>
-                        <select id="role">
-                            <option>Select</option>
+                        <select id="role" name="role">
+                            <option value="">Select</option>
                             <option>Student</option>
                             <option>Teacher</option>
                             <option>Parent</option>
@@ -656,8 +656,8 @@
 
                      <div class="field" id="teacherField" style="display: none;">
                         <label for="Teacher">Teacher</label>
-                        <select id="Teacher">
-                            <option>select</option>
+                        <select id="Teacher" name="teacher">
+                            <option value="">select</option>
                             <option>Rajeev Kumar Chaurasia(HOD)</option>
                             <option>Shashwat Srivastava</option>
                             <option>Sakshi Yadav</option>
@@ -668,18 +668,18 @@
 
                     <div class="field">
                         <label for="class">Department / Class <span style="color:red;">*</span></label>
-                        <input type="text" id="class" placeholder=" Diploma  Computer Science">
+                        <input type="text" id="class" name="class_name" placeholder=" Diploma  Computer Science">
                     </div>
 
                     <div class="field" id="feedbackForField">
                         <label for="target">Feedback for <span style="color:red;">*</span></label>
-                        <input type="text" id="target" placeholder="Teacher / Student name">
+                        <input type="text" id="target" name="target" placeholder="Teacher / Student name">
                     </div>
 
                      <div class="field" id="subjectField">
                         <label for="subject">Subject</label>
-                        <select id="subject">
-                            <option>select</option>
+                        <select id="subject" name="subject">
+                            <option value="">select</option>
                             <option>Internet of Things</option>
                             <option>Information security</option>
                             <option>Multimedia</option>
@@ -699,8 +699,8 @@
 
                     <div class="field" id="YearField">
                         <label for="year">Year & Semster <span style="color:red;">*</span></label>
-                        <select id="year">
-                            <option>select</option>
+                        <select id="year" name="year">
+                            <option value="">select</option>
                             <option>l year -l semester</option>
                             <option>l year -ll semester</option>
                             <option>ll year -lll semester</option>
@@ -793,7 +793,7 @@
 
                      <div class="field" style="grid-column: 1 / -1;">
                         <label for="comments">Suggest your Observation<span style="color:red;">*</span></label>
-                        <textarea id="comments" placeholder="Share your suggestions and observations..." minlength="20" maxlength="150" required></textarea>
+                        <textarea id="comments" name="comment" placeholder="Share your suggestions and observations..." minlength="20" maxlength="150" required></textarea>
                         <button type="submit" class="submit-btn">Submit Feedback</button>
                     </div>
                 </div>
@@ -819,24 +819,6 @@
             document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 10);
         });
 
-        document.querySelector('form').addEventListener('submit', (event) => {
-            event.preventDefault();
-
-          const roleValue = document.getElementById('role').value;
-          const teacher = document.getElementById('Teacher').value;
-          const subject = document.getElementById('subject').value;
-          const target = document.getElementById('target').value;
-          const year = document.getElementById('year').value;
-          const className = document.getElementById('class').value;
-          const comments = document.getElementById('comments').value;
-                    const ratings = Object.fromEntries(
-              [...document.querySelectorAll('.rating input:checked')]
-                                .map(input => [input.name, Number(input.value) * 20 + '%'])
-            );
-
-                console.log({ roleValue, teacher, subject, target, year, className, comments, ratings });
-        });
-        
     </script>
     <footer>
       <div class="footer-content">

@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
-from django.http import request
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
-from django.core.mail import send_mail
+from .models import Feedback
 
 
 def login(request):
@@ -28,50 +28,35 @@ def logout(request):
 
 def submit(request):
     if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'])
 
-        roleValue = request.POST.get('roleValue') or request.POST.get('role', '')
-        teacher = request.POST.get('teacher') or request.POST.get('Teacher', '')
-        subject = request.POST.get('subject', '')
-        target = request.POST.get('target', '')
-        className = (
-                request.POST.get('className')
-                or request.POST.get('class_name')
-                or request.POST.get('class', '')
-            )
-        year = request.POST.get('year', '')
-        comment = request.POST.get('comment') or request.POST.get('comments', '')
+    ratings = {}
+    for name in ('teaching', 'communication', 'support', 'growth'):
+        value = request.POST.get(name, '').strip()
+        if not value:
+            ratings[name] = None
+            continue
+        try:
+            rating = int(value)
+        except ValueError:
+            messages.error(request, 'Ratings must be between 1 and 5.')
+            return redirect('home')
+        if not 1 <= rating <= 5:
+            messages.error(request, 'Ratings must be between 1 and 5.')
+            return redirect('home')
+        ratings[name] = rating
 
-        rating_names = ('teaching', 'communication', 'support', 'growth')
-        ratings = {
-                name: f'{int(request.POST[name]) * 20}%'
-                for name in rating_names
-                if request.POST.get(name, '').isdigit()
-                and 1 <= int(request.POST[name]) <= 5
-            }
-
-        feedback = '\n'.join((
-                f'Role: {roleValue or "Not provided"}',
-                f'Teacher: {teacher or "Not provided"}',
-                f'Subject: {subject or "Not provided"}',
-                f'Feedback for: {target or "Not provided"}',
-                f'Class: {className or "Not provided"}',
-                f'Year: {year or "Not provided"}',
-                'Ratings:',
-                *(f'  {name.title()}: {value}' for name, value in ratings.items()),
-                f'Comment: {comment or "Not provided"}',
-            ))
-
-        send_mail(
-                'Feedback Was Submitted',
-                feedback,
-                'mppolytechnic',
-                ['hod sir email','principle sir email'],
-                fail_silently=False,
-            )
-        messages.info(request,"mail send successfully")
-        return redirect('login')
-    else:
-       messages.info(request,"mail not send")
-       return redirect('home')
+    Feedback.objects.create(
+        roleValue=request.POST.get('roleValue', '').strip(),
+        teacher=request.POST.get('teacher', '').strip(),
+        subject=request.POST.get('subject', '').strip(),
+        target=request.POST.get('target', '').strip(),
+        class_name=request.POST.get('class_name', '').strip(),
+        year=request.POST.get('year', '').strip(),
+        comment=request.POST.get('comment', '').strip(),
+        **ratings,
+    )
+    messages.success(request, 'Feedback submitted successfully.')
+    return redirect('home')
    
 	     	    
