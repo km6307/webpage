@@ -28,7 +28,6 @@ def logout(request):
 
 def submit(request):
     if request.method != 'POST':
-        return redirect('home')
 
         roleValue = request.POST.get('roleValue') or request.POST.get('role', '')
         teacher = request.POST.get('teacher') or request.POST.get('Teacher', '')
