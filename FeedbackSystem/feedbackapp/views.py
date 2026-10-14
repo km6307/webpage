@@ -23,9 +23,9 @@ def home(request):
     return render(request, '360°Feedback.html')
 
 def logout(request):
-    return render(request, 'login.html')
     messages.info(request,"feedback  send successfully.your are eligible for next feedback after 1 month.")
-
+    return render(request, 'login.html')
+    
 def submit(request):
     if request.method != 'POST':
         return HttpResponseNotAllowed(['POST'])
