@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student's Feedback Form</title>
+    {% load static %}
+    <title>360° Feedback System</title>
+    <link rel="icon" type="image/jpeg" href="{% static 'logo1.jpg' %}">
+    
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: #f4f7f6;
-            padding: 20px;
-            color: #333;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f3f7ff, #eef4ff);
+            color: #1f2937;
+            overflow-x: hidden;
         }
+        
 
         .container {
             max-width: 900px;
@@ -160,6 +164,25 @@
     </style>
 </head>
 <body>
+     <div id="top">
+        <div>
+          <img id="image" src="{% static 'img.png' %}" alt=" MP Image" width="100px" height="100px">  
+        </div>
+        <div style="margin-left: 350px;">
+            <p style="font-size:25px;color:#123F36;">MAHARANA PRATAP POLYTECHNIC <br> 
+              <span >360 FEEDBACK SYSTEM <span>
+            </p>
+        </div>
+    </div>
+    <div class="nav">
+        <p style="text-align:center; font-size:30px; color:black;">Welcome: 
+        <span style="font-weight: bold; color:#e67e22;">{{ user.username }}</span></p>
+     <ul class="navbar">
+             <li><a href="{% url 'logout' %}">
+                <i aria-hidden="true">↪</i>Logout</a></li>
+    </ul>
+    </div>
+    <hr>
 
 <div class="container">
     <h1>Student's Feedback Form</h1>
@@ -206,7 +229,7 @@
             </div>
             <div class="form-group">
                 <label for="facultyName">Name of the Faculty:</label>
-                <select id="facultyName" required>
+                <select id="facultyName" disabled required>
                     <option value="" disabled selected>Select Faculty</option>
                     <option value="Rajeev kumar c">Rajeev kumar Chaurasia</option>
                     <option value="vishal negi">vishal Singh Negi</option>
@@ -221,7 +244,7 @@
             </div>
             <div class="form-group">
                 <label for="semester">Semester:</label>
-                <select id="semester" required>
+                <select id="semester"  required>
                     <option value="" disabled selected>Select Semester</option>
                     <option value="1">I</option>
                     <option value="2">II</option>
