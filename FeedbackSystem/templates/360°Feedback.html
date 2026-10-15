@@ -352,10 +352,21 @@
     const subjectSelect = document.getElementById('subject');
     const facultySelect = document.getElementById('facultyName');
     const shashwatSubjects = ['Computer Network', 'Java', 'CSO', 'IC'];
+    const rajeevSubjects = ['DSA', 'DS using C', 'OS'];
+    const anshuSubjects = ['IS', 'AI and ML', 'e-gov', 'WT'];
+    const sakhiSubjects = ['IOT', 'DBMS', 'SE'];
 
     subjectSelect.addEventListener('change', function() {
-        if (shashwatSubjects.includes(this.value)) {
+        if (rajeevSubjects.includes(this.value)) {
+            facultySelect.value = 'Rajeev kumar c';
+        } else if (shashwatSubjects.includes(this.value)) {
             facultySelect.value = 'Shashwat Srivastava';
+        } else if (anshuSubjects.includes(this.value)) {
+            facultySelect.value = 'Anshu Singh';
+        } else if (sakhiSubjects.includes(this.value)) {
+            facultySelect.value = 'sakhi yadav';
+        } else if (this.value === 'MT') {
+            facultySelect.value = 'vishal negi';
         }
     });
 
