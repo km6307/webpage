@@ -349,6 +349,16 @@
     </form>
 </div>
 <script>
+    const subjectSelect = document.getElementById('subject');
+    const facultySelect = document.getElementById('facultyName');
+    const shashwatSubjects = ['Computer Network', 'Java', 'CSO', 'IC'];
+
+    subjectSelect.addEventListener('change', function() {
+        if (shashwatSubjects.includes(this.value)) {
+            facultySelect.value = 'Shashwat Srivastava';
+        }
+    });
+
     document.getElementById('feedbackForm').addEventListener('submit', function(event) {
         event.preventDefault();
         alert('Feedback submitted successfully!');
