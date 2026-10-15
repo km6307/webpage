@@ -21,6 +21,145 @@
             overflow-x: hidden;
         }
         
+        #top {
+            width:100%;
+            min-height: 112px;
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background-image: url('{% static "img1.jpg" %}'); 
+            background-repeat: no-repeat; 
+            background-size:100% 100%;
+            border-radius: 22px;
+            position: relative;
+            }
+
+        #top::after {
+            content: "";
+            width: 180px;
+            height: 180px;
+            position: absolute;
+            right: -42px;
+            top: -80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        #top > div {
+            position: relative;
+            z-index: 1;
+        }
+
+        #image {
+            width:100px;
+            height: 100px;
+            border-radius:50%;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 14px rgba(15, 23, 42, 0.25);
+        }
+
+        #top p {
+            margin: 0;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: 0.04em;
+            text-shadow: 0 2px 5px rgba(15, 23, 42, 0.25);
+        }
+
+        #top p span {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: clamp(1.1rem, 2.3vw, 1.7rem);
+            letter-spacing: 0.12em;
+        }
+
+        #top p .feedback-title {
+            color: #f4c95d;
+            text-shadow: 0 2px 5px rgba(15, 23, 42, 0.55);
+        }
+
+        #logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3px;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+            animation: logo-loading 2.9s linear infinite;
+            object-fit: cover;
+        }
+
+        #logo:hover {
+            animation-duration: 0.8s;
+        }
+        @keyframes logo-loading {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            list-style: none;
+            margin: 0;
+        }
+
+        .navbar li {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .navbar a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 6px;
+            background: #2c3e50;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .navbar a:hover,
+        .navbar a:focus-visible {
+            background: #1f6f64;
+            transform: translateY(-1px);
+            outline: none;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            max-width: 1100px;
+            margin: 18px auto 24px;
+            padding: 12px 20px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.07);
+        }
+
+        .welcome-message {
+            color: #475569;
+            font-size: 16px;
+        }
+
+        .welcome-message span {
+            color: #1f6f64;
+            font-weight: 700;
+        }
+        
 
         .container {
             max-width: 900px;
@@ -157,6 +296,16 @@
         }
 
         @media (max-width: 600px) {
+            .nav {
+                align-items: stretch;
+                flex-direction: column;
+                margin: 14px 12px 20px;
+            }
+
+            .navbar {
+                justify-content: flex-start;
+            }
+
             .info-grid {
                 grid-template-columns: 1fr;
             }
@@ -169,19 +318,17 @@
           <img id="image" src="{% static 'img.png' %}" alt=" MP Image" width="100px" height="100px">  
         </div>
         <div style="margin-left: 350px;">
-            <p style="font-size:25px;color:#123F36;">MAHARANA PRATAP POLYTECHNIC <br> 
-              <span >360 FEEDBACK SYSTEM <span>
+            <p style="font-size:25px;color: #f4c95d;">MAHARANA PRATAP POLYTECHNIC <br> 
+              <span class="feedback-title">360° FEEDBACK SYSTEM</span>
             </p>
         </div>
     </div>
-    <div class="nav">
-        <p style="text-align:center; font-size:30px; color:black;">Welcome: 
-        <span style="font-weight: bold; color:#e67e22;">{{ user.username }}</span></p>
-     <ul class="navbar">
-             <li><a href="{% url 'logout' %}">
-                <i aria-hidden="true">↪</i>Logout</a></li>
-    </ul>
-    </div>
+    <nav class="nav" aria-label="Main navigation">
+        <p class="welcome-message">Welcome, <span>{{ user.username }}</span></p>
+        <ul class="navbar">
+            <li><a href="{% url 'logout' %}"><i aria-hidden="true">↪</i> Logout</a></li>
+        </ul>
+    </nav>
     <hr>
 
 <div class="container">
