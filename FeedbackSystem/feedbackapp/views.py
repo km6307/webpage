@@ -23,7 +23,7 @@ def home(request):
     return render(request, '360°Feedback.html')
 
 def logout(request):
-    messages.info(request,"feedback  send successfully.your are eligible for next feedback after 1 month.")
+   
     return render(request, 'login.html')
     
 def submit(request):
@@ -56,7 +56,7 @@ def submit(request):
         comment=request.POST.get('comment', '').strip(),
         **ratings,
     )
-    messages.success(request, 'Feedback submitted successfully.')
+    messages.info(request,"feedback  send successfully.your are eligible for next feedback after 1 month.")
     return redirect('home')
    
 	     	    
