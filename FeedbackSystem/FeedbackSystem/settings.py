@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-z297*3dgnevv5z8m1$qbrytk^f-#sj+teqlx@t45-v5*!f9y&m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.37.223.237']
 
 
 # Application definition
@@ -76,8 +76,10 @@ WSGI_APPLICATION = 'FeedbackSystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'feedbackData',
+        'USER': 'root',
+        'PASSWORD': 'Krishna@4416',
     }
 }
 
