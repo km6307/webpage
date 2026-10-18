@@ -25,7 +25,10 @@ def home(request):
 def logout(request):
    
     return render(request, 'login.html')
-    
+
+def admin(request):
+    feedbacks = Feedback.objects.all()
+    return render(request, 'adminPanel.html', {'feedbacks': feedbacks})  
 def submit(request):
     if request.method != 'POST':
         return HttpResponseNotAllowed(['POST'])
