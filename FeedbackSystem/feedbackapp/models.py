@@ -31,6 +31,6 @@ class Feedback(models.Model):
     class Meta:
         db_table = 'data'
 
-
+#######################data base me data name se table create hoga
     def __str__(self):
         return f"{self.student.username} - {self.subject}"
