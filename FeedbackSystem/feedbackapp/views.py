@@ -37,7 +37,7 @@ def submit(request):
         try:
             Feedback.objects.create(
                 student=request.user,
-                academic_year=request.POST.get('academicYear'),
+                academicyear=request.POST.get('academicYear'),
                 subject=request.POST.get('subject'),
                 faculty_name=request.POST.get('facultyName'),
                 course=request.POST.get('course'),
