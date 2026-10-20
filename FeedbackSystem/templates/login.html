@@ -19,7 +19,7 @@
         background: #c0cde2;
         color: #17231c;
       }
-      .container { width: 100%; max-width: 400px; }
+      .container { width: 100%; max-width: 350px; }
       .card {
         overflow: hidden;
         border: 1px solid #e2e9e4;
@@ -28,25 +28,45 @@
         box-shadow: 0 20px 55px rgba(25, 55, 37, .11);
       }
       .card-header {
-        padding: 34px 36px 30px;
+        padding: 22px 24px 18px;
         color: #173b28;
         background: #edf7f0;
         border-bottom: 1px solid #dcebe0;
       }
-      .card-header h1 { margin: 0 0 8px; font-size: 27px; letter-spacing: -.4px; }
+      .card-header h1 { margin: 0 0 6px; font-size: 22px; letter-spacing: -.4px; }
       .card-header p { margin: 0; color: #557261; font-size: 14px; }
-      .card-body { padding: 34px 36px 30px; }
-      .form-group { margin-bottom: 22px; }
+      .card-body { padding: 22px 24px 18px; }
+      .form-group { margin-bottom: 14px; }
       label { display: block; margin-bottom: 9px; color: #30443a; font-size: 14px; font-weight: 700; }
       input[type="text"], input[type="password"] {
         width: 100%;
-        padding: 14px 15px;
+        padding: 8px 10px;
         border: 1px solid #d2ddd5;
         border-radius: 8px;
         color: #17231c;
         background: #fbfdfb;
         font-size: 15px;
         transition: border-color .2s, box-shadow .2s;
+      }
+      #role {
+        display: block;
+        width: 100%;
+        margin-bottom: 16px;
+        padding: 8px 10px;
+        border: 1px solid #d2ddd5;
+        border-radius: 8px;
+        color: #17231c;
+        background: #fbfdfb;
+        font: inherit;
+        font-size: 15px;
+        cursor: pointer;
+        transition: border-color .2s, box-shadow .2s;
+      }
+      #role:focus {
+        outline: none;
+        border-color: #198754;
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(25, 135, 84, .12);
       }
       input:focus {
         outline: none;
@@ -56,6 +76,7 @@
       }
       .password-wrapper { position: relative; }
       .password-wrapper input { padding-right: 48px; }
+      .password-wrapper input::-ms-reveal { display: none; }
       .toggle-password {
         position: absolute;
         top: 50%;
@@ -88,7 +109,7 @@
             box-shadow: 0 7px 16px rgba(25, 135, 84, .25); 
         }
       .card-footer {
-         padding: 16px;
+         padding: 12px;
         color: #789083;
          background: #fafcfb; 
          text-align: center;
@@ -123,10 +144,17 @@
     <form action="login" method="post">
         {% csrf_token %}
 
-
+        <div>
+            <label for="role">Role <span style="color:red">*</span></label>
+            <select name="role" id="role" required>
+                <option value="">Select your role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+        </div>
         <div class="form-group">
            <label for="username"> Id <span style="color:red">*</span></label>
-           <input type="text" name="username" id="username"placeholder="Enter your id" required>
+           <input type="text" name="username" id="username"placeholder="Enter your Username" required>
         </div>
         <div class="form-group">
             <label for="password"> Password <span style="color:red">*</span> </label>
