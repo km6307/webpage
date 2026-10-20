@@ -357,7 +357,7 @@
     {% csrf_token %}
         <div class="info-grid">
             <div class="form-group">
-                <label for="academicYear">Academic Year:</label>
+                <label for="academicYear"> Year<span style="color: red;">*</span></label>
                 <select id="academicYear" name="academicYear" >
                     <option value="" disabled selected>Select Academic Year</option>
                     <option value="2024-25">2024-25</option>
@@ -372,7 +372,7 @@
                 </select>
             </div>
              <div class="form-group">
-                <label for="semester">Semester:</label>
+                <label for="semester">Semester<span style="color: red;">*</span></label>
                 <select id="semester" name="semester" required>
                     <option value="" disabled selected>Select Semester</option>
                     <option value="1">I</option>
@@ -384,7 +384,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="subject" >Subject:</label>
+                <label for="subject" >Subject<span style="color: red;">*</span></label>
                 <select id="subject" name="subject" required>
                     <option value="" disabled selected>Select Subject</option>
                     <option value="DSA">C language</option>
@@ -402,11 +402,13 @@
                     <option value="SE">Software Engineering</option>
                     <option value="e-gov">E-Governance</option>
                     <option value="IC">Indian Constitution</option>
-                     <option value="py">Python Programming</option>
+                    <option value="py">Python Programming</option>
+                    <option value="E&SU">Entrepreneurship and Start-ups</option>
+                     <option value="E">Electives</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="facultyName">Name of the Faculty:</label>
+                <label for="facultyName"> Faculty<span style="color: red;">*</span></label>
                 <select id="facultyName" name="facultyName" disabled required>
                     <option value="" disabled selected>Select Faculty</option>
                     <option value="Rajeev kumar c">Rajeev Kumar Chaurasia</option>
@@ -417,12 +419,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="course">Course:</label>
+                <label for="course">Course<span style="color: red;">*</span></label>
                 <input type="text" id="course" name="course" value="Diploma" readonly required>
             </div>
            
-            <div class="form-group" style="grid-column: span 2;">
-                <label for="feedbackDate">Date of the feedback:</label>
+            <div class="form-group">
+                <label for="feedbackDate">Date of the feedback<span style="color: red;">*</span></label>
                 <input type="date" id="feedbackDate" name="feedbackDate" required>
             </div>
         </div>
@@ -541,61 +543,6 @@
 <footer class="site-footer">
     © 2025 Maharana Pratap Polytechnic • All Rights Reserved
 </footer>
-<script>
-    const subjectSelect = document.getElementById('subject');
-    const semesterSelect = document.getElementById('semester');
-    const facultySelect = document.getElementById('facultyName');
-    const subjectPlaceholder = subjectSelect.options[0].cloneNode(true);
-    const allSubjectOptions = Array.from(subjectSelect.options).slice(1).map(option => option.cloneNode(true));
-    const semesterThreeSubjects = ['DSA', 'Computer Network', 'OS', 'DBMS', 'WT'];
-    const semesterFourSubjects = ['DS using C', 'CSO', 'SE', 'py', 'e-gov'];
-    const shashwatSubjects = ['Computer Network', 'Java', 'CSO', 'IC'];
-    const rajeevSubjects = ['DSA', 'DS using C', 'OS'];
-    const anshuSubjects = ['IS', 'AI and ML', 'e-gov', 'WT'];
-    const sakshiSubjects = ['IOT', 'DBMS', 'SE'];
-
-    function updateFaculty() {
-        if (rajeevSubjects.includes(subjectSelect.value)) {
-            facultySelect.value = 'Rajeev kumar c';
-        } else if (shashwatSubjects.includes(subjectSelect.value)) {
-            facultySelect.value = 'Shashwat Srivastava';
-        } else if (anshuSubjects.includes(subjectSelect.value)) {
-            facultySelect.value = 'Anshu Singh';
-        } else if (sakshiSubjects.includes(subjectSelect.value)) {
-            facultySelect.value = 'sakshi yadav';
-        } else if (subjectSelect.value === 'MT') {
-            facultySelect.value = 'Vishal Negi';
-        } else {
-            facultySelect.value = '';
-        }
-    }
-
-    function updateSubjects() {
-        const selectedValue = subjectSelect.value;
-        const semesterSubjects = {
-            '3': semesterThreeSubjects,
-            '4': semesterFourSubjects
-        };
-        const availableSubjects = semesterSubjects[semesterSelect.value]
-            ? allSubjectOptions.filter(option => semesterSubjects[semesterSelect.value].includes(option.value))
-            : allSubjectOptions;
-
-        subjectSelect.replaceChildren(subjectPlaceholder.cloneNode(true));
-        availableSubjects.forEach(option => subjectSelect.add(option.cloneNode(true)));
-        subjectSelect.value = availableSubjects.some(option => option.value === selectedValue)
-            ? selectedValue
-            : '';
-        updateFaculty();
-    }
-
-    subjectSelect.addEventListener('change', updateFaculty);
-    semesterSelect.addEventListener('change', updateSubjects);
-
-    document.getElementById('feedbackForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert('Feedback submitted successfully!');
-        // Here you can add code to send the form data to a server or process it as needed.
-    });
-</script>
+ <script type="text/javascript" src="{% static 'script.js' %}"></script>
 </body> 
 </html>
