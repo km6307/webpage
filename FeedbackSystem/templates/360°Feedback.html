@@ -371,6 +371,18 @@
                     <option value="2032-33">2032-33</option>
                 </select>
             </div>
+             <div class="form-group">
+                <label for="semester">Semester:</label>
+                <select id="semester" name="semester" required>
+                    <option value="" disabled selected>Select Semester</option>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                    <option value="5">V</option>
+                    <option value="6">VI</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="subject" >Subject:</label>
                 <select id="subject" name="subject" required>
@@ -390,6 +402,7 @@
                     <option value="SE">Software Engineering</option>
                     <option value="e-gov">E-Governance</option>
                     <option value="IC">Indian Constitution</option>
+                     <option value="py">Python Programming</option>
                 </select>
             </div>
             <div class="form-group">
@@ -407,18 +420,7 @@
                 <label for="course">Course:</label>
                 <input type="text" id="course" name="course" value="Diploma" readonly required>
             </div>
-            <div class="form-group">
-                <label for="semester">Semester:</label>
-                <select id="semester" name="semester" required>
-                    <option value="" disabled selected>Select Semester</option>
-                    <option value="1">I</option>
-                    <option value="2">II</option>
-                    <option value="3">III</option>
-                    <option value="4">IV</option>
-                    <option value="5">V</option>
-                    <option value="6">VI</option>
-                </select>
-            </div>
+           
             <div class="form-group" style="grid-column: span 2;">
                 <label for="feedbackDate">Date of the feedback:</label>
                 <input type="date" id="feedbackDate" name="feedbackDate" required>
@@ -541,25 +543,53 @@
 </footer>
 <script>
     const subjectSelect = document.getElementById('subject');
+    const semesterSelect = document.getElementById('semester');
     const facultySelect = document.getElementById('facultyName');
+    const subjectPlaceholder = subjectSelect.options[0].cloneNode(true);
+    const allSubjectOptions = Array.from(subjectSelect.options).slice(1).map(option => option.cloneNode(true));
+    const semesterThreeSubjects = ['DSA', 'Computer Network', 'OS', 'DBMS', 'WT'];
+    const semesterFourSubjects = ['DS using C', 'CSO', 'SE', 'py', 'e-gov'];
     const shashwatSubjects = ['Computer Network', 'Java', 'CSO', 'IC'];
     const rajeevSubjects = ['DSA', 'DS using C', 'OS'];
     const anshuSubjects = ['IS', 'AI and ML', 'e-gov', 'WT'];
     const sakshiSubjects = ['IOT', 'DBMS', 'SE'];
 
-    subjectSelect.addEventListener('change', function() {
-        if (rajeevSubjects.includes(this.value)) {
+    function updateFaculty() {
+        if (rajeevSubjects.includes(subjectSelect.value)) {
             facultySelect.value = 'Rajeev kumar c';
-        } else if (shashwatSubjects.includes(this.value)) {
+        } else if (shashwatSubjects.includes(subjectSelect.value)) {
             facultySelect.value = 'Shashwat Srivastava';
-        } else if (anshuSubjects.includes(this.value)) {
+        } else if (anshuSubjects.includes(subjectSelect.value)) {
             facultySelect.value = 'Anshu Singh';
-        } else if (sakshiSubjects.includes(this.value)) {
+        } else if (sakshiSubjects.includes(subjectSelect.value)) {
             facultySelect.value = 'sakshi yadav';
-        } else if (this.value === 'MT') {
+        } else if (subjectSelect.value === 'MT') {
             facultySelect.value = 'Vishal Negi';
+        } else {
+            facultySelect.value = '';
         }
-    });
+    }
+
+    function updateSubjects() {
+        const selectedValue = subjectSelect.value;
+        const semesterSubjects = {
+            '3': semesterThreeSubjects,
+            '4': semesterFourSubjects
+        };
+        const availableSubjects = semesterSubjects[semesterSelect.value]
+            ? allSubjectOptions.filter(option => semesterSubjects[semesterSelect.value].includes(option.value))
+            : allSubjectOptions;
+
+        subjectSelect.replaceChildren(subjectPlaceholder.cloneNode(true));
+        availableSubjects.forEach(option => subjectSelect.add(option.cloneNode(true)));
+        subjectSelect.value = availableSubjects.some(option => option.value === selectedValue)
+            ? selectedValue
+            : '';
+        updateFaculty();
+    }
+
+    subjectSelect.addEventListener('change', updateFaculty);
+    semesterSelect.addEventListener('change', updateSubjects);
 
     document.getElementById('feedbackForm').addEventListener('submit', function(event) {
         event.preventDefault();
