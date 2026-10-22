@@ -29,7 +29,7 @@ def logout(request):
 
 def admin(request):
     feedbacks = Feedback.objects.all()
-    return render(request, 'adminPanel.html', {'feedbacks': feedbacks})
+    return render(request, 'admin.html', {'feedbacks': feedbacks})
 
 
 def submit(request):
