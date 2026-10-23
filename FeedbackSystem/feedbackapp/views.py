@@ -28,8 +28,8 @@ def logout(request):
 
 
 def admin(request):
-    feedbacks = Feedback.objects.all()
-    return render(request, 'admin.html', {'feedbacks': feedbacks})
+   feedbackValues = Feedback.objects.all()
+   return render(request, 'admin.html', {'feedbackValues': feedbackValues})
 
 
 def submit(request):

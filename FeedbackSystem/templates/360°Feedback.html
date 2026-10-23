@@ -355,6 +355,7 @@
       action="{% url 'submit' %}">
 
     {% csrf_token %}
+                <input type="hidden" id="rating" name="rating" value="">
         <div class="info-grid">
             <div class="form-group">
                 <label for="academicYear"> Year<span style="color: red;">*</span></label>
@@ -544,5 +545,21 @@
     © 2025 Maharana Pratap Polytechnic • All Rights Reserved
 </footer>
  <script src="{% static 'script.js' %}"></script>
+ <script>
+    document.getElementById('feedbackForm').addEventListener('submit', function () {
+        const ratings = Array.from(this.querySelectorAll('input[type="radio"]:checked'))
+            .map(function (input) { return Number(input.value); });
+        if (ratings.length) {
+            this.querySelector('#ratingAverage').value = (
+                ratings.reduce(function (total, rating) { return total + rating; }, 0) / ratings.length
+            ).toFixed(2);
+        }
+        const feedbackValues = Object.fromEntries(new FormData(this).entries());
+        this.querySelectorAll(':disabled[name]').forEach(function (field) {
+            feedbackValues[field.name] = field.value;
+        });
+        console.log('Feedback values:', feedbackValues);
+    });
+ </script>
 </body> 
 </html>
