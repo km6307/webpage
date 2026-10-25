@@ -12,10 +12,14 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
+
+            if user.is_staff or user.is_superuser:
+                return redirect('admin')
             return redirect('home')
 
         messages.info(request, 'Either Username or Password is Incorrect')
         return render(request, 'login.html')
+
     return render(request, 'login.html')
 
 
