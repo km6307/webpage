@@ -8,9 +8,10 @@ def login(request):
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
         password = request.POST.get('password')
+        role = request.POST.get('role', '').strip().lower()
         user = authenticate(request, username=username, password=password)
 
-        if user is not None:
+        if user is not None and (role != 'admin' or user.is_staff or user.is_superuser):
             auth_login(request, user)
 
             if user.is_staff or user.is_superuser:
