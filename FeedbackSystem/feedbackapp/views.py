@@ -37,9 +37,6 @@ def logout(request):
 def admin(request):
     return render(request, 'admin.html')
  
-
-
-
 def submit(request):
     if request.method != 'POST':
         return redirect('home')
