@@ -548,7 +548,7 @@
         const ratings = Array.from(this.querySelectorAll('input[type="radio"]:checked'))
             .map(function (input) { return Number(input.value); });
         if (ratings.length) {
-            this.querySelector('#ratingAverage').value = (
+            this.querySelector('#rating').value = (
                 ratings.reduce(function (total, rating) { return total + rating; }, 0) / ratings.length
             ).toFixed(2);
         }
