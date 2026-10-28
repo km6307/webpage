@@ -29,37 +29,65 @@ def home(request):
 
 
 def logout(request):
-    return render(request, 'login.html')
+     auth_logout(request)
+     return redirect('login')
 
 
 def admin(request):
-   feedbackValues = Feedback.objects.all()
-   return render(request, 'admin.html', {'feedbackValues': feedbackValues})
+    feedbackValues = Feedback.objects.all().order_by('-id')
+
+    total_feedback = feedbackValues.count()
+
+    ratings = []
+    for item in feedbackValues:
+        ratings.extend([
+            item.q1, item.q2, item.q3a,
+            item.q3b, item.q3c, item.q4,
+            item.q5, item.q6
+        ])
+
+    average_rating = (
+        round(sum(ratings) / len(ratings), 2)
+        if ratings else 0
+    )
+
+    return render(request, 'admin.html', {
+        'feedbackValues': feedbackValues,
+        'total_feedback': total_feedback,
+        'average_rating': average_rating,
+    })
+
+
 
 
 def submit(request):
-    if request.method == 'POST':
-        try:
-            Feedback.objects.create(
-                student=request.user,
-                academicyear=request.POST.get('academicYear'),
-                subject=request.POST.get('subject'),
-                faculty_name=request.POST.get('facultyName'),
-                course=request.POST.get('course'),
-                semester=int(request.POST.get('semester')),
-                feedback_date=request.POST.get('feedbackDate'),
-                q1=int(request.POST.get('q1')),
-                q2=int(request.POST.get('q2')),
-                q3a=int(request.POST.get('q3a')),
-                q3b=int(request.POST.get('q3b')),
-                q3c=int(request.POST.get('q3c')),
-                q4=int(request.POST.get('q4')),
-                q5=int(request.POST.get('q5')),
-                q6=int(request.POST.get('q6')),
-            )
-            messages.success(request, 'Feedback saved successfully!')
-            return redirect('feedback_form')
-        except (ValueError, TypeError):
-            messages.error(request, 'Please fill in all feedback fields correctly.')
-    return render(request, '360°Feedback.html')
-          
+    if request.method != 'POST':
+        return redirect('home')
+
+    try:
+        Feedback.objects.create(
+            student=request.user,
+            academicyear=request.POST.get('academicYear'),
+            semester=request.POST.get('semester'),
+            subject=request.POST.get('subject'),
+            faculty=request.POST.get('facultyName'),
+            course=request.POST.get('course'),
+            feedback_date=request.POST.get('feedbackDate') or None,
+            q1=int(request.POST.get('q1')),
+            q2=int(request.POST.get('q2')),
+            q3a=int(request.POST.get('q3a')),
+            q3b=int(request.POST.get('q3b')),
+            q3c=int(request.POST.get('q3c')),
+            q4=int(request.POST.get('q4')),
+            q5=int(request.POST.get('q5')),
+            q6=int(request.POST.get('q6')),
+        )
+
+        messages.success(request, 'Feedback saved successfully!')
+        return redirect('home')
+
+    except Exception as e:
+            print("FEEDBACK SAVE ERROR:", repr(e))
+            messages.error(request, f"Feedback save nahi hua: {e}")
+
+    return redirect('home')

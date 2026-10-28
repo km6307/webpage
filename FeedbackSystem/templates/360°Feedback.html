@@ -350,11 +350,9 @@
     <h1>Student's Feedback Form</h1>
     <div class="subtitle">(To be used by institutions)</div>
 
-   <form id="feedbackForm"
-      method="POST"
-      action="{% url 'submit' %}">
-
+   <form id="feedbackForm" method="POST" action="{% url 'submit' %}">
     {% csrf_token %}
+
                 <input type="hidden" id="rating" name="rating" value="">
         <div class="info-grid">
             <div class="form-group">
