@@ -548,15 +548,17 @@
         const ratings = Array.from(this.querySelectorAll('input[type="radio"]:checked'))
             .map(function (input) { return Number(input.value); });
         if (ratings.length) {
-            this.querySelector('#rating').value = (
-                ratings.reduce(function (total, rating) { return total + rating; }, 0) / ratings.length
-            ).toFixed(2);
+            const averageRating = ratings.reduce(function (total, rating) {
+                return total + rating;
+            }, 0) / ratings.length;
+            this.querySelector('#rating').value = averageRating.toFixed(2);
         }
+
         const feedbackValues = Object.fromEntries(new FormData(this).entries());
         this.querySelectorAll(':disabled[name]').forEach(function (field) {
             feedbackValues[field.name] = field.value;
         });
-        console.log('Feedback values:', feedbackValues);
+        console.log('All feedback values (including stored average rating):', feedbackValues);
     });
  </script>
 </body> 

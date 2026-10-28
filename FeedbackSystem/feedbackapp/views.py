@@ -37,11 +37,16 @@ def logout(request):
 def admin(request):
     return render(request, 'admin.html')
  
+
 def submit(request):
     if request.method != 'POST':
         return redirect('home')
 
     try:
+        if not request.user.is_authenticated:
+            messages.error(request, 'Please login first.')
+            return redirect('login')
+
         Feedback.objects.create(
             student=request.user,
             academicyear=request.POST.get('academicYear'),
@@ -61,10 +66,9 @@ def submit(request):
         )
 
         messages.success(request, 'Feedback saved successfully!')
-        return redirect('home')
 
     except Exception as e:
-            print("FEEDBACK SAVE ERROR:", repr(e))
-            messages.error(request, f"Feedback save nahi hua: {e}")
+        print("FEEDBACK SAVE ERROR:", repr(e))
+        messages.error(request, f'Feedback save failed: {e}')
 
     return redirect('home')
