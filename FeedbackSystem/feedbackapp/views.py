@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import redirect, render
+from django.contrib.auth import logout as auth_logout
 from .models import Feedback
 
 
@@ -34,29 +35,8 @@ def logout(request):
 
 
 def admin(request):
-    feedbackValues = Feedback.objects.all().order_by('-id')
-
-    total_feedback = feedbackValues.count()
-
-    ratings = []
-    for item in feedbackValues:
-        ratings.extend([
-            item.q1, item.q2, item.q3a,
-            item.q3b, item.q3c, item.q4,
-            item.q5, item.q6
-        ])
-
-    average_rating = (
-        round(sum(ratings) / len(ratings), 2)
-        if ratings else 0
-    )
-
-    return render(request, 'admin.html', {
-        'feedbackValues': feedbackValues,
-        'total_feedback': total_feedback,
-        'average_rating': average_rating,
-    })
-
+    return render(request, 'admin.html')
+ 
 
 
 
