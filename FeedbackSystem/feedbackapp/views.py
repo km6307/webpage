@@ -38,25 +38,44 @@ def admin(request):
     return render(request, 'admin.html')
  
 
+from django.contrib import messages
+from django.shortcuts import redirect
+from .models import Feedback
+
+
 def submit(request):
     if request.method != 'POST':
         return redirect('home')
 
+    if not request.user.is_authenticated:
+        messages.error(request, 'Please login first.')
+        return redirect('login')
+
     try:
-        if not request.user.is_authenticated:
-            messages.error(request, 'Please login first.')
-            return redirect('login')
+        names = ['q1', 'q2', 'q3a', 'q3b',
+                 'q3c', 'q4', 'q5', 'q6']
+
+        ratings = []
+
+        for name in names:
+            value = request.POST.get(name)
+
+            if not value:
+                raise ValueError(f'{name} ki rating select nahi hui.')
+
+            ratings.append(float(value))
+
+        average = sum(ratings) / len(ratings)
 
         Feedback.objects.create(
             student=request.user,
             academicYear=request.POST.get('academicYear'),
-            semester=request.POST.get('semester'),
             subject=request.POST.get('subject'),
             facultyName=request.POST.get('facultyName'),
             course=request.POST.get('course'),
+            semester=request.POST.get('semester'),
             feedbackDate=request.POST.get('feedbackDate') or None,
-            rating=request.POST.get('rating') or None,
-
+            rating=average
         )
 
         messages.success(request, 'Feedback saved successfully!')

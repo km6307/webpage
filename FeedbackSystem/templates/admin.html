@@ -71,14 +71,13 @@
     <tbody>
         {% for item in feedbackValues %}
         <tr>
-            <td>{{ item.academicyear }}</td>
+            <td>{{ item.academicYear }}</td>
             <td>{{ item.semester }}</td>
             <td>{{ item.subject }}</td>
-            <td>{{ item.faculty }}</td>
+            <td>{{ item.facultyName }}</td>
             <td>{{ item.course }}</td>
-            <td>{{ item.feedback_date }}</td>
-            <td>{{ item.average_rating}}</td>
-            <td>{{ item.feedback }}</td>
+            <td>{{ item.feedbackDate }}</td>
+            <td>{{ item.rating}}</td>
         </tr>
         {% empty %}
         <tr>
