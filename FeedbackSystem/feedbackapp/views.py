@@ -49,20 +49,14 @@ def submit(request):
 
         Feedback.objects.create(
             student=request.user,
-            academicyear=request.POST.get('academicYear'),
+            academicYear=request.POST.get('academicYear'),
             semester=request.POST.get('semester'),
             subject=request.POST.get('subject'),
-            faculty=request.POST.get('facultyName'),
+            facultyName=request.POST.get('facultyName'),
             course=request.POST.get('course'),
-            feedback_date=request.POST.get('feedbackDate') or None,
-            q1=int(request.POST.get('q1')),
-            q2=int(request.POST.get('q2')),
-            q3a=int(request.POST.get('q3a')),
-            q3b=int(request.POST.get('q3b')),
-            q3c=int(request.POST.get('q3c')),
-            q4=int(request.POST.get('q4')),
-            q5=int(request.POST.get('q5')),
-            q6=int(request.POST.get('q6')),
+            feedbackDate=request.POST.get('feedbackDate') or None,
+            rating=request.POST.get('rating') or None,
+
         )
 
         messages.success(request, 'Feedback saved successfully!')
