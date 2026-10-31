@@ -415,10 +415,10 @@
                 <label for="facultyName"> Faculty<span style="color: red;">*</span></label>
                <select id="facultyName" name="facultyName" tabindex="-1" aria-readonly="true" required>
                     <option value="" disabled selected>Select Faculty</option>
-                    <option value="Rajeev kumar c">Rajeev Kumar Chaurasia</option>
-                    <option value="Vishal Negi">Vishal Singh Negi</option>
-                    <option value="sakshi yadav">Sakshi Yadav</option>
-                    <option value="Anshu Singh">Anshu </option>
+                    <option value="Rajeev kumar Chaurasia">Rajeev Kumar Chaurasia</option>
+                    <option value="Vishal Singh Negi">Vishal Singh Negi</option>
+                    <option value="Sakshi Yadav">Sakshi Yadav</option>
+                    <option value="Anshu">Anshu </option>
                     <option value="Shashwat Srivastava">Shashwat Srivastava</option>
                 </select>
             </div>
@@ -565,15 +565,15 @@
 
     function updateFaculty() {
         if (rajeevSubjects.includes(subjectSelect.value)) {
-            facultySelect.value = 'Rajeev kumar c';
+            facultySelect.value = 'Rajeev kumar Chaurasia';
         } else if (shashwatSubjects.includes(subjectSelect.value)) {
             facultySelect.value = 'Shashwat Srivastava';
         } else if (anshuSubjects.includes(subjectSelect.value)) {
-            facultySelect.value = 'Anshu Singh';
+            facultySelect.value = 'Anshu';
         } else if (sakshiSubjects.includes(subjectSelect.value)) {
-            facultySelect.value = 'sakshi yadav';
+            facultySelect.value = 'Sakshi Yadav';
         } else if (subjectSelect.value === 'MT') {
-            facultySelect.value = 'Vishal Negi';
+            facultySelect.value = 'Vishal Singh Negi';
         } else {
             facultySelect.value = '';
         }

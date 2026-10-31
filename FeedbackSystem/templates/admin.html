@@ -54,7 +54,7 @@
                     <th>Course</th>
                     <th>Date</th>
                     <th>Rating</th>
-                    
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody id="feedbackTable">
@@ -67,7 +67,12 @@
                     <td>{{ item.course }}</td>
                     <td>{{ item.feedbackDate }}</td>
                     <td>{{ item.rating }}</td>
-                   
+                    <td>
+                        <form method="post" action="{% url 'delete' item.id %}" onsubmit="return confirm('Delete this feedback record?');">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr class="empty-row">

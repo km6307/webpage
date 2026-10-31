@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.shortcuts import redirect, render
 import traceback
+from django.shortcuts import get_object_or_404, redirect
+from django.views.decorators.http import require_POST
 from .models import Feedback
 
 
@@ -72,3 +74,7 @@ def submit(request):
         messages.error(request, f'Error: {e}')
 
     return redirect('login')
+def delete(request, feedback_id):
+       feedback = get_object_or_404(Feedback, id=feedback_id)
+       feedback.delete()
+       return redirect("admin_panel")   

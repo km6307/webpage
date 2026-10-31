@@ -8,4 +8,5 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('admin', views.admin, name='admin'),
     path('submit', views.submit, name='submit'),
+    path('delete/<int:feedback_id>/', views.delete, name='delete'),
 ]
