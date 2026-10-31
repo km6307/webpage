@@ -51,8 +51,4 @@
     subjectSelect.addEventListener('change', updateFaculty);
     semesterSelect.addEventListener('change', updateSubjects);
 
-    document.getElementById('feedbackForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert('Feedback submitted successfully!');
-        // Here you can add code to send the form data to a server or process it as needed.
-    });
+    

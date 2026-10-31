@@ -13,4 +13,5 @@ class Feedback(models.Model):
     rating = models.FloatField(default=0.0)
 
     class Meta:
-        db_table = 'data'
+     db_table = 'data'
+     unique_together = ('student', 'academicYear', 'semester', 'subject', 'facultyName')

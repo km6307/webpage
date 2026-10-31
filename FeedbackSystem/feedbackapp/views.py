@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.shortcuts import redirect, render
+import traceback
 from .models import Feedback
 
 
@@ -39,34 +40,36 @@ def admin(request):
 
 
 def submit(request):
+    print("######## SUBMIT CALLED ########", request.method, request.user)
+    ...
+    print(">>> SUBMIT CALLED", request.method, request.user)
     if request.method != 'POST':
         return redirect('home')
 
     if not request.user.is_authenticated:
+        print(">>> USER LOGGED IN NAHI HAI")
         messages.error(request, 'Please login first.')
         return redirect('login')
 
-    ratings = [
-        int(request.POST.get('q1', 0)),
-        int(request.POST.get('q2', 0)),
-        int(request.POST.get('q3a', 0)),
-        int(request.POST.get('q3b', 0)),
-        int(request.POST.get('q3c', 0)),
-        int(request.POST.get('q4', 0)),
-        int(request.POST.get('q5', 0)),
-        int(request.POST.get('q6', 0)),
-    ]
-    average_rating = sum(ratings) / len(ratings)
+    try:
+        fields = ['q1', 'q2', 'q3a', 'q3b', 'q3c', 'q4', 'q5', 'q6']
+        ratings = [int(request.POST.get(f) or 0) for f in fields]
+        average_rating = sum(ratings) / len(ratings)
 
-    Feedback.objects.create(
-        student=request.user,
-        academicYear=request.POST.get('academicYear'),
-        subject=request.POST.get('subject'),
-        facultyName=request.POST.get('facultyName'),
-        course=request.POST.get('course'),
-        semester=request.POST.get('semester'),
-        feedbackDate=request.POST.get('feedbackDate') or None,
-        rating=average_rating,
-    )
-    messages.success(request, 'Feedback saved successfully!')
+        obj = Feedback.objects.create(
+            student=request.user,
+            academicYear=request.POST.get('academicYear') or '',
+            subject=request.POST.get('subject') or '',
+            facultyName=request.POST.get('facultyName') or '',
+            course=request.POST.get('course') or '',
+            semester=request.POST.get('semester') or '',
+            feedbackDate=request.POST.get('feedbackDate') or None,
+            rating=average_rating,
+        )
+        print(">>> SAVED ID:", obj.id)
+        messages.success(request, 'Feedback saved successfully!')
+    except Exception as e:
+        traceback.print_exc()
+        messages.error(request, f'Error: {e}')
+
     return redirect('login')

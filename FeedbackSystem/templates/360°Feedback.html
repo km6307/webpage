@@ -224,6 +224,11 @@
             border-color: #3498db;
         }
 
+        #facultyName {
+            pointer-events: none;
+            background-color: #f1f5f9;
+        }
+
         /* Feedback Table Styling */
         .table-responsive {
             overflow-x: auto;
@@ -357,7 +362,7 @@
         <div class="info-grid">
             <div class="form-group">
                 <label for="academicYear"> Year<span style="color: red;">*</span></label>
-                <select id="academicYear" name="academicYear" >
+                <select id="academicYear" name="academicYear" required>
                     <option value="" disabled selected>Select Academic Year</option>
                     <option value="2024-25">2024-25</option>
                     <option value="2025-26">2025-26</option>
@@ -408,7 +413,7 @@
             </div>
             <div class="form-group">
                 <label for="facultyName"> Faculty<span style="color: red;">*</span></label>
-               <select id="facultyName" name="facultyName" required>
+               <select id="facultyName" name="facultyName" tabindex="-1" aria-readonly="true" required>
                     <option value="" disabled selected>Select Faculty</option>
                     <option value="Rajeev kumar c">Rajeev Kumar Chaurasia</option>
                     <option value="Vishal Negi">Vishal Singh Negi</option>
@@ -542,8 +547,64 @@
 <footer class="site-footer">
     © 2025 Maharana Pratap Polytechnic • All Rights Reserved
 </footer>
- <script src="{% static 'script.js' %}"></script> 
+ <!-- <script src="{% static 'script.js' %}"></script> -->
  <script>
+     const subjectSelect = document.getElementById('subject');
+    const semesterSelect = document.getElementById('semester');
+    const facultySelect = document.getElementById('facultyName');
+    const subjectPlaceholder = subjectSelect.options[0].cloneNode(true);
+    const allSubjectOptions = Array.from(subjectSelect.options).slice(1).map(option => option.cloneNode(true));
+    const semesterThreeSubjects = ['DSA', 'Computer Network', 'OS', 'DBMS', 'WT'];
+    const semesterFourSubjects = ['DS using C', 'CSO', 'SE', 'py', 'e-gov'];
+    const semesterFiveSubjects = ['MT', 'Java', 'IOT', 'AI and ML', 'IC', 'IS'];
+    const semesterSixSubjects = ['E&SU', 'E'];
+    const shashwatSubjects = ['Computer Network', 'Java', 'CSO', 'IC'];
+    const rajeevSubjects = ['DSA', 'DS using C', 'OS'];
+    const anshuSubjects = ['IS', 'AI and ML', 'e-gov', 'WT'];
+    const sakshiSubjects = ['IOT', 'DBMS', 'SE'];
+
+    function updateFaculty() {
+        if (rajeevSubjects.includes(subjectSelect.value)) {
+            facultySelect.value = 'Rajeev kumar c';
+        } else if (shashwatSubjects.includes(subjectSelect.value)) {
+            facultySelect.value = 'Shashwat Srivastava';
+        } else if (anshuSubjects.includes(subjectSelect.value)) {
+            facultySelect.value = 'Anshu Singh';
+        } else if (sakshiSubjects.includes(subjectSelect.value)) {
+            facultySelect.value = 'sakshi yadav';
+        } else if (subjectSelect.value === 'MT') {
+            facultySelect.value = 'Vishal Negi';
+        } else {
+            facultySelect.value = '';
+        }
+    }
+
+    function updateSubjects() {
+        const selectedValue = subjectSelect.value;
+        const semesterSubjects = {
+            '3': semesterThreeSubjects,
+            '4': semesterFourSubjects,
+            '5': semesterFiveSubjects,
+            '6': semesterSixSubjects
+        };
+        const availableSubjects = semesterSubjects[semesterSelect.value]
+            ? allSubjectOptions.filter(option => semesterSubjects[semesterSelect.value].includes(option.value))
+            : allSubjectOptions;
+
+        subjectSelect.replaceChildren(subjectPlaceholder.cloneNode(true));
+        availableSubjects.forEach(option => subjectSelect.add(option.cloneNode(true)));
+        subjectSelect.value = availableSubjects.some(option => option.value === selectedValue)
+            ? selectedValue
+            : '';
+        updateFaculty();
+    }
+
+    subjectSelect.addEventListener('change', updateFaculty);
+    semesterSelect.addEventListener('change', updateSubjects);
+    updateFaculty();
+
+    
+
     document.getElementById('feedbackForm').addEventListener('submit', function () {
         const ratings = Array.from(this.querySelectorAll('input[type="radio"]:checked'))
             .map(function (input) { return Number(input.value); });
