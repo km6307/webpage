@@ -36,12 +36,11 @@ def logout(request):
 
 
 def admin(request):
-    return render(request, 'admin.html')
+    feedbacks = Feedback.objects.all().order_by('-id')
+    return render(request, 'admin.html', {'feedbacks': feedbacks})
 
 
 def submit(request):
-    print("######## SUBMIT CALLED ########", request.method, request.user)
-    ...
     print(">>> SUBMIT CALLED", request.method, request.user)
     if request.method != 'POST':
         return redirect('home')
