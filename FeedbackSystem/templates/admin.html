@@ -68,9 +68,10 @@
                     <td>{{ item.feedbackDate }}</td>
                     <td>{{ item.rating }}</td>
                     <td>
-                        <form method="post" action="{% url 'delete' item.id %}" onsubmit="return confirm('Delete this feedback record?');">
-                            {% csrf_token %}
-                            <button type="submit">Delete</button>
+                        <form method="post" action="{% url 'delete' item.id %}"
+                             onsubmit="return confirm('Kya aap sach me ise delete karna chahte hain?');">
+                              {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                 </tr>

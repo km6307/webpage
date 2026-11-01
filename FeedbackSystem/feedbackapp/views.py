@@ -75,6 +75,7 @@ def submit(request):
 
     return redirect('login')
 def delete(request, feedback_id):
-       feedback = get_object_or_404(Feedback, id=feedback_id)
-       feedback.delete()
-       return redirect("admin_panel")   
+    feedback = get_object_or_404(Feedback, id=feedback_id)
+    feedback.delete()
+    messages.success(request, "Feedback delete ho gaya.")
+    return redirect('admin')
