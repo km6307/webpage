@@ -67,7 +67,6 @@ def submit(request):
             feedbackDate=request.POST.get('feedbackDate') or None,
             rating=average_rating,
         )
-        print(">>> SAVED ID:", obj.id)
         messages.success(request, 'Feedback saved successfully!')
     except Exception as e:
         traceback.print_exc()
